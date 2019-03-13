@@ -42,8 +42,6 @@ export default {
         this.book = response.data;
       });
   },
-  methods: {
-    connect: function() {}
-  }
+  methods: {}
 };
 </script>

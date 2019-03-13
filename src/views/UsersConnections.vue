@@ -1,0 +1,56 @@
+<template>
+  <div class="users-connections">
+    <div>
+      <h3>{{ user.first_name }}'s Friends</h3>
+        <div v-for="follower in user.followers"> 
+          <router-link v-bind:to="'/users/' + follower.id">
+            <h4> {{follower.first_name}} {{follower.last_name}}</h4>
+          </router-link>
+        </div>
+        <div v-for="followee in user.followees"> 
+          <router-link v-bind:to="'/users/' + followee.id">
+            <h4>{{followee.first_name}} {{followee.last_name}}</h4>
+          </router-link>
+        </div>
+    </div>
+  </div>
+</template>
+
+<style>
+
+</style>
+
+<script>
+var axios = require("axios");
+
+export default {
+  data: function() {
+    return {
+      user: {
+              id: "",
+              first_name: "",
+              last_name: "",
+              email: "",
+            },
+      followers: {
+        id: "",
+        first_name: "",
+        last_name: "",
+      },
+      followees: {
+        id: "",
+        first_name: "",
+        last_name: "",
+      },
+      errors: []
+    };
+  },  created: function() {
+    axios.get("/api/users/" + this.$route.params.id)
+    .then(response => {
+      this.user = response.data;
+    });
+  },
+
+  methods: {}
+};
+</script>

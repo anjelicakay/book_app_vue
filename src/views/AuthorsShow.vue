@@ -39,8 +39,6 @@ export default {
         this.author = response.data;
       });
   },
-  methods: {
-    connect: function() {}
-  }
+  methods: {}
 };
 </script>
