@@ -5,16 +5,26 @@
         <button v-on:click="connect()" class="btn btn-primary">Connect</button>
       </div>
     <h3>Currently Reading</h3>
-    <div v-for="book in user.books">
-      <ul>
-        <router-link v-bind:to="'/books/' + book.id">
-          <h3>{{ book.title }}</h3>
+    <div v-for="current_book in user.current_books">
+      <!-- <ul> -->
+        <router-link v-bind:to="'/books/' + current_book.id">
+          <h3>{{ current_book.title }}</h3>
         </router-link>
-      </ul>
-
-      
+      <!-- </ul> -->
     </div>
-    
+      <h3>Have Read</h3>
+      <div v-for="read_book in user.read_books">
+      <router-link v-bind:to="'/books/' + read_book.id">
+        <h3>{{ read_book.title }}</h3>
+      </router-link>
+      </div>
+      <h3>Want to Read</h3>
+      <div v-for="to_read in user.to_read">
+      <router-link v-bind:to="'/books/' + to_read.id">
+        <h3>{{ to_read.title }}</h3>
+      </router-link>
+      </div>
+
   </div>
 </template>
 
@@ -33,8 +43,29 @@ export default {
                               id: "",
                               user_id: "",
                               book_id: "",
-                              status: ""
-                            }]
+                              status: "",
+                            }],
+              current_books: [{
+                              id: "",
+                              title: "",
+                              author_id: "",
+                              summary: "",
+                              genre: "",
+                            }],
+              read_books: [{
+                            id: "",
+                            title: "",
+                            author_id: "",
+                            summary: "",
+                            genre: "",
+                          }],
+              to_read: [{
+                          id: "",
+                          title: "",
+                          author_id: "",
+                          summary: "",
+                          genre: ""
+                        }]                  
             },
       errors: []
     };
@@ -44,6 +75,9 @@ export default {
       .then(response => {
         console.log(response.data);
         this.user = response.data;
+      }).catch(error => {
+        console.log(error.response.data.errors);
+        this.$router.push("/login")
       });
   },
   methods: {
