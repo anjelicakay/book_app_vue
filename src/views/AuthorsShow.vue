@@ -4,7 +4,10 @@
     <p>{{ author.biography }}</p>
     <h3>Books</h3>
      <div v-for="book in author.books">
-      <p>{{ book.title }}</p>
+      <router-link v-bind:to="'/books/' + book.id">
+        <img v-bind:src="book.image_url" :alt="book.title">
+        <p>{{ book.title }}</p>
+      </router-link>
      </div>
 
   </div>
@@ -26,7 +29,9 @@ export default {
                           title: "",
                           author_id: "",
                           summary: "",
-                          genre: ""
+                          genre: "",
+                          image_url: "",
+                          page_count: ""
                         }]
             },
       errors: []
