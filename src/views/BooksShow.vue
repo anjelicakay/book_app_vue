@@ -9,7 +9,7 @@
     <p>{{ book.summary }}</p>
     <h3>Reviews</h3>
     <div v-for="review in book.reviews">
-      <!-- <p>{{ review.user.first_name }}</p> -->
+<!--       <p>{{ review.user.first_name }}</p> -->
       <p>{{ review.rating }}</p>
       <p>{{ review.content }}</p>
     </div>
