@@ -7,6 +7,7 @@ import AuthorsShow from './views/AuthorsShow.vue'
 import UsersConnections from './views/UsersConnections.vue'
 import UsersEdit from './views/UsersEdit.vue'
 import UsersLibrary from './views/UsersLibrary.vue'
+import BooksSearch from './views/BooksSearch.vue'
 import Signup from './views/Signup.vue'
 import Login from './views/Login.vue'
 import Logout from './views/Logout.vue'
@@ -25,6 +26,7 @@ export default new Router({
     { path: '/users/:id/connections', name: 'users-connections', component: UsersConnections},
     { path: '/users/:id/edit', name: 'users-edit', component: UsersEdit },
     { path: '/', name: 'users-library', component: UsersLibrary },
+    { path: "/search", name: "search", component: BooksSearch},
     { path: "/signup", name: "signup", component: Signup },
     { path: "/login", name: "login", component: Login },
     { path: "/logout", name: "logout", component: Logout }

@@ -11,6 +11,7 @@
     <div v-for="review in book.reviews">
 <!--       <p>{{ review.user.first_name }}</p> -->
       <p>{{ review.rating }}</p>
+      <star-rating v-bind:increment="0.5" v-bind:max-rating="5" v-bind:read-only="true" v-model="integer"></star-rating>
       <p>{{ review.content }}</p>
     </div>
   </div>

@@ -9,6 +9,9 @@
                       <div class="nav-menu ml-auto">
                           <ul class="">
                               <li class="nav-menu-item">
+                                  <router-link to="/search">Book Search</router-link>
+                              </li>
+                              <li class="nav-menu-item">
                                   <router-link to="/">My Library</router-link>
                               </li>
                               <li class="nav-menu-item">

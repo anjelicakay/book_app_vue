@@ -13,6 +13,9 @@
     </div>
   </div>
 </template>
+<style>
+
+</style>
 
 <script>
 var axios = require("axios");
@@ -29,6 +32,7 @@ export default {
         this.books = response.data;
       });
   },
-  methods: {}
+  methods: {
+  }
 };
 </script>
