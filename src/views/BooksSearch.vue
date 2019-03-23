@@ -1,13 +1,18 @@
 <template>
   <div class="book-search">
-      <h1>Book Finder</h1>
+      <h2>Book Search</h2>
       <form v-on:submit.prevent="submit()">
-        <input v-model="searchTerm">
+        <input v-model="searchTerm" placeholder="Enter title">
         <input type="submit" value="Go">
       </form>
 
-      <h1>Books</h1>
-      <div v-for="book in books"> {{ books.items[0].volumeInfo.title }}</div>
+      <h3>Books</h3>
+      <div v-for="item in books.items">
+        <img src="item.volumeInfo.imageLinks.thumbnail" class="thumbnail">
+        <h4>{{ item.volumeInfo.title }} {{ item.volumeInfo.subtitle }}</h4>
+        <p>by: {{ item.volumeInfo.authors }}</p>
+        <p>Page Count: {{ item.volumeInfo.pageCount }}</p>
+    </div>
 
   </div>
 </template>
@@ -21,10 +26,21 @@ var axios = require('axios');
 export default {
   data: function() {
     return {
-      books: [{
+      books: {
               kind: "",
-              items: [{}]
-      }],
+              items: [{
+                      selfLink: "",
+                      volumeInfo: {
+                                    title: "",
+                                    pageCount: "",
+                                    authors: "",
+                                    imageLinks: {
+                                                 smallThumbnail: "",
+                                                 thumbnail: "",
+                                    }
+                }
+              }]
+      },
       searchTerm: ""
     };
   },
@@ -36,12 +52,12 @@ export default {
   },
   methods: {
       submit: function() {
-        var newSearchTerm = this.searchTerm.replace(' ', '_')
+        var newSearchTerm = this.searchTerm.replace(/ /g, '_')
         axios
           .get("/api/google/books?search=" + newSearchTerm)
           .then(response => {
             this.books = response.data;
-            this.searchTerm = "";
+            // this.searchTerm = "";
           });
       }
   }
