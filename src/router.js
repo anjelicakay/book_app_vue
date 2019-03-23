@@ -4,6 +4,7 @@ import BooksIndex from './views/BooksIndex.vue'
 import UsersShow from './views/UsersShow.vue'
 import BooksShow from './views/BooksShow.vue'
 import AuthorsShow from './views/AuthorsShow.vue'
+import ReviewsNew from './views/ReviewsNew.vue'
 import UsersConnections from './views/UsersConnections.vue'
 import UsersEdit from './views/UsersEdit.vue'
 import UsersLibrary from './views/UsersLibrary.vue'
@@ -23,6 +24,7 @@ export default new Router({
     { path: "/users/:id", name: "users-show", component: UsersShow },
     { path: "/books/:id", name: "books-show", component: BooksShow },
     { path: "/authors/:id", name: "authors-show", component: AuthorsShow },
+    { path: "/reviews/new", name: "reviews-new", component: ReviewsNew },
     { path: '/users/:id/connections', name: 'users-connections', component: UsersConnections},
     { path: '/users/:id/edit', name: 'users-edit', component: UsersEdit },
     { path: '/', name: 'users-library', component: UsersLibrary },

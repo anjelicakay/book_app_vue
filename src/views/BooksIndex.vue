@@ -23,7 +23,7 @@ var axios = require("axios");
 export default {
   data: function() {
     return {
-            books: []    
+            books: []  
             }
   },
   created: function() {

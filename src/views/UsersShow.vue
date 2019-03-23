@@ -81,10 +81,15 @@ export default {
       });
   },
   methods: {
+    // follow: function() {
+    //   if( followee_id === nil )
+    //     
+    // },
     connect: function() {
       var params = { followee_id: this.user.id };
       axios.post("/api/followings/", params);
     },
+  
   }
 };
 </script>
