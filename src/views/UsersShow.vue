@@ -11,25 +11,26 @@
       <button v-if="user_id != user.id" v-on:click="connect()" class="btn btn-primary">Follow</button>
       <!-- <button v-if="user_id != user.id" v-on:click="connect()" class="btn btn-primary">Following</button> -->
     </div>
-    <h3>Currently Reading</h3>
+    <h2>Currently Reading</h2>
     <div v-for="current_book in user.current_books">
-      <!-- <ul> -->
+        <img :src="current_book.image_url">
         <router-link v-bind:to="'/books/' + current_book.id">
           <h3>{{ current_book.title }}</h3>
         </router-link>
-      <!-- </ul> -->
     </div>
-      <h3>Have Read</h3>
+      <h2>Have Read</h2>
       <div v-for="read_book in user.read_books">
-      <router-link v-bind:to="'/books/' + read_book.id">
-        <h3>{{ read_book.title }}</h3>
-      </router-link>
+        <img :src="read_book.image_url">
+        <router-link v-bind:to="'/books/' + read_book.id">
+          <h3>{{ read_book.title }}</h3>
+        </router-link>
       </div>
-      <h3>Want to Read</h3>
+      <h2>Want to Read</h2>
       <div v-for="to_read in user.to_read">
-      <router-link v-bind:to="'/books/' + to_read.id">
-        <h3>{{ to_read.title }}</h3>
-      </router-link>
+        <img :src="to_read.image_url">
+        <router-link v-bind:to="'/books/' + to_read.id">
+          <h3>{{ to_read.title }}</h3>
+        </router-link>
       </div>
 
   </div>

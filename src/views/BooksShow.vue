@@ -1,13 +1,16 @@
 <template>
   <div class="books-show">
-    <!-- <p>Add to My Library</p> --> -->
     <h2>{{ book.title }}</h2>
     <img v-bind:src="book.image_url" :alt="book.title">
-    <router-link v-bind:to="'/authors/' + book.author.id">
-      <h3>{{ book.author.first_name }} {{ book.author.last_name }}</h3>
-    </router-link>
-    <p>{{ book.genre }}</p>
+    <p>by: {{ book.author.name }}</p>
+    <h4>Add to My Library</h4>
+    <button v-on:click="libraryCurrentRead()" class="btn btn-primary">Currently Reading</button>
+    <button v-on:click="libraryToRead()" class="btn btn-primary">Want to Read</button>
+    <button v-on:click="libraryRead()" class="btn btn-primary">Read</button>
+    <p>Genre: {{ book.genre }}</p>
     <p>{{ book.summary }}</p>
+    <div>
+    </div>
     <div class="accordion d-flex justify-content-center">
       <div class="card z-depth-0 bordered">
         <div class="card-header" id="headingOne2">
@@ -60,19 +63,28 @@ export default {
               genre: "",
               image_url: "",
               page_count: "",
+              author: {
+                        name: "",
+                      },
               reviews: [{
                         user_id: "",
                         book_id: "",
                         rating: "",
                         content: "",
-                        user: {
-                                  id: "",
-                                  first_name: "",
-                                  last_name: "",
-                                  email: ""
-                                }
+                        // user: {
+                        //           id: "",
+                        //           first_name: "",
+                        //           last_name: "",
+                        //           email: ""
+                        //         }
               }]   
       },
+      inventories: [{
+                      id: "",
+                      user_id: "",
+                      book_id: "",
+                      status: "",
+                    }],
       newReviewContent: "",
       rating: 0,
       errors: []
@@ -91,21 +103,54 @@ export default {
       });
   },
   methods: {
-    // submit: function() {
-    //   console.log("Create new review");
-    //   var params = {
-    //                 book_id: this.book.id,
-    //                 rating: this.rating,
-    //                 content: this.newReviewContent
-    //                 };         
-    //   axios.post("/api/reviews", params)
-    //     .then(response => {
-    //       console.log("Success", response.data);
-    //       this.$router.push("/books/" + this.book.id);
-    //     }).catch(error => {
-    //       this.errors = error.response.data.errors;
-    //     });              
-    // }
+    submit: function() {
+      console.log("Create new review");
+      var params = {
+                    book_id: this.book.id,
+                    rating: this.rating,
+                    content: this.newReviewContent
+                    };         
+      axios.post("/api/reviews", params)
+        .then(response => {
+          console.log("Success", response.data);
+          this.$router.push("/books/" + this.book.id);
+        }).catch(error => {
+          this.errors = error.response.data.errors;
+        });              
+    },
+    libraryCurrentRead: function() {
+      var user_id = localStorage.getItem("user_id");
+      var status = 0
+      console.log("Add to library")
+      var params = { 
+                    user_id: this.user_id,
+                    book_id: this.book.id,
+                    status: 0
+                  };
+      axios.post("/api/inventories/", params);
+    },
+    libraryToRead: function() {
+      var user_id = localStorage.getItem("user_id");
+      var status = 1
+      console.log("Add to library")
+      var params = { 
+                    user_id: this.user_id,
+                    book_id: this.book.id,
+                    status: 1 
+                  };
+      axios.post("/api/inventories/", params);
+    },
+    libraryRead: function() {
+      var user_id = localStorage.getItem("user_id");
+      var status = 2
+      console.log("Add to library")
+      var params = { 
+                    user_id: this.user_id,
+                    book_id: this.book.id,
+                    status: 2
+                  };
+      axios.post("/api/inventories/", params);
+    }
   }
 };
 </script>

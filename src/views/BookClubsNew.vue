@@ -34,10 +34,10 @@ export default {
   methods: {
     submit: function (){
       console.log("Create the book club");
-      var params={
-                  name: this.newBookClubName,
-                  book_id: this.newBookClubBookId
-                  };
+      var params = {
+                    name: this.newBookClubName,
+                    book_id: this.newBookClubBookId
+                    };
       axios.post("/api/book_clubs", params)
         .then(response => {
           console.log("Success", response.data);
