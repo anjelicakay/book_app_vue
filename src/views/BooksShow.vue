@@ -1,15 +1,8 @@
 <template>
   <div class="books-show">
-    <div>
-      <img :src="item.volumeInfo.imageLinks.thumbnail">
-    <h2>{{ volumeInfo.title }} {{ item.volumeInfo.subtitle }}</h2>
-    <p>by: {{ item.volumeInfo.authors }}</p>
-    <p>{{item.volumeInfo.categories }}</p>
-    <p>Page Count: {{ item.volumeInfo.pageCount }}</p>
-    <p>{{ item.volumeInfo.description}}</p>
-    </div>
-    <p>Add to My Library</p>
-<!--     <img v-bind:src="book.image_url" :alt="book.title">
+    <!-- <p>Add to My Library</p> --> -->
+    <h2>{{ book.title }}</h2>
+    <img v-bind:src="book.image_url" :alt="book.title">
     <router-link v-bind:to="'/authors/' + book.author.id">
       <h3>{{ book.author.first_name }} {{ book.author.last_name }}</h3>
     </router-link>
@@ -44,11 +37,11 @@
     </div>
 
     <h3>Reviews</h3>
-    <div v-for="review in book.reviews"> -->
-      <!-- <p>{{ review.user.first_name }}</p> -->
-<!--       <star-rating v-model="review.rating" v-bind:increment="0.5" v-bind:max-rating="5" v-bind:read-only="true"></star-rating>
+    <div v-for="review in book.reviews">
+<!--       <p>{{ review.user.first_name }}</p> -->
+      <star-rating v-model="review.rating" v-bind:increment="0.5" v-bind:max-rating="5" v-bind:read-only="true"></star-rating>
       <p>{{ review.content }}</p>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -60,33 +53,26 @@ export default {
   data: function() {
     return {
       book: {
-              kind: "",
-              items: [{
-                      selfLink: "",
-                      volumeInfo: {
-                                    title: "",
-                                    pageCount: "",
-                                    authors: "",
-                                    description: "",
-                                    categories: "",
-                                    imageLinks: {
-                                                 thumbnail: "",
-                                    }
-                }
-              }]
+              id: "",
+              title: "",
+              author_id: "",
+              summary: "",
+              genre: "",
+              image_url: "",
+              page_count: "",
+              reviews: [{
+                        user_id: "",
+                        book_id: "",
+                        rating: "",
+                        content: "",
+                        user: {
+                                  id: "",
+                                  first_name: "",
+                                  last_name: "",
+                                  email: ""
+                                }
+              }]   
       },
-      reviews: [{
-                user_id: "",
-                book_id: "",
-                rating: "",
-                content: "",
-                user: {
-                          id: "",
-                          first_name: "",
-                          last_name: "",
-                          email: ""
-                        },
-      }],    
       newReviewContent: "",
       rating: 0,
       errors: []
@@ -99,7 +85,7 @@ export default {
     //     this.book = response.data;
     //   });
     axios
-      .get("/api/google/")
+      .get("/api/books/" + this.$route.params.id)
       .then(response => {
         this.book = response.data;
       });

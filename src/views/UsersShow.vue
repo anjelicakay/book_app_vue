@@ -8,7 +8,7 @@
     <router-link v-if="user_id == user.id" class="btn btn-primary" v-bind:to="'/users/' + user.id + '/edit'">Update Profile</router-link>
     <!-- </div> -->
     <div>
-      <button v-if="user_id != user.id" id="myDIV" v-on:click="connect()" class="btn btn-primary">Follow</button>
+      <button v-if="user_id != user.id" v-on:click="connect()" class="btn btn-primary">Follow</button>
       <!-- <button v-if="user_id != user.id" v-on:click="connect()" class="btn btn-primary">Following</button> -->
     </div>
     <h3>Currently Reading</h3>

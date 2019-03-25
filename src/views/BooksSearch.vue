@@ -8,10 +8,12 @@
 
       <h3>Books</h3>
       <div v-for="item in books.items">
-        <router-link v-bind:to="item.selfLink">
+        <span @click="selectBook(item)">
         <h4>{{ item.volumeInfo.title }} {{ item.volumeInfo.subtitle }}</h4>
-        </router-link>
-        <img :src="item.volumeInfo.imageLinks.thumbnail">
+        </span>
+        <div v-if="item.volumeInfo.imageLinks">
+          <img :src="item.volumeInfo.imageLinks.thumbnail">
+        </div>
         <p>by: {{ item.volumeInfo.authors }}</p>
         <p>Page Count: {{ item.volumeInfo.pageCount }}</p>
     </div>
@@ -45,12 +47,7 @@ export default {
       searchTerm: ""
     };
   },
-  created: function() {
-    // axios.get("/api/books")
-    //   .then(response => {
-    //     this.books = response.data;
-    //   });
-  },
+  created: function() {},
   methods: {
       submit: function() {
         var newSearchTerm = this.searchTerm.replace(/ /g, '_')
@@ -59,6 +56,14 @@ export default {
           .then(response => {
             this.books = response.data;
             // this.searchTerm = "";
+          });
+      },
+      selectBook: function(book) {
+        axios
+          .get("/api/google/book_find/" + book.id)
+          .then( response => {
+            console.log(response.data);
+            this.$router.push("/books/" + response.data.id);
           });
       }
   }

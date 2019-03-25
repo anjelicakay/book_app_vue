@@ -26,7 +26,7 @@ export default new Router({
     { path: '/users/:id/connections', name: 'users-connections', component: UsersConnections},
     { path: '/', name: 'users-library', component: UsersLibrary },
     { path: "/books", name: "books-index", component: BooksIndex },
-    { path: "/results", name: "books-show", component: BooksShow },
+    { path: "/books/:id", name: "books-show", component: BooksShow },
     { path: "/search", name: "search", component: BooksSearch},
     { path: "/authors/:id", name: "authors-show", component: AuthorsShow },
     { path: "/book_clubs/:id", name: "book-clubs-show", component: BookClubsShow },
