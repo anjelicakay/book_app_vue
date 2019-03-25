@@ -1,6 +1,7 @@
 <template>
   <div class="authors-show">
-    <h2>{{ author.first_name }} {{ author.last_name }}</h2>
+    <h2>{{ }}</h2>
+<!--     <h2>{{ author.first_name }} {{ author.last_name }}</h2>
     <p>{{ author.biography }}</p>
     <h3>Books</h3>
      <div v-for="book in author.books">
@@ -8,7 +9,7 @@
         <img v-bind:src="book.image_url" :alt="book.title">
         <p>{{ book.title }}</p>
       </router-link>
-     </div>
+     </div> -->
 
   </div>
 </template>

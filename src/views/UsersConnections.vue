@@ -8,6 +8,7 @@
           </router-link>
         </div>
         <div v-for="followee in user.followees"> 
+          <img :src="followee.image" height="100" width="100">
           <router-link v-bind:to="'/users/' + followee.id">
             <h4>{{followee.first_name}} {{followee.last_name}}</h4>
           </router-link>
@@ -36,11 +37,13 @@ export default {
         id: "",
         first_name: "",
         last_name: "",
+        image: "",
       },
       followees: {
         id: "",
         first_name: "",
         last_name: "",
+        image: "",
       },
       errors: []
     };

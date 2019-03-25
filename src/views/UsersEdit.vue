@@ -19,6 +19,10 @@
           <label>New Email: </label>
           <input class='form-control' type='text' v-model="user.email" placeholder="New Email">
         </div>
+        <div class="form-group">
+          <label>New Profile Picture: </label>
+          <input class='form-control' type='text' v-model="user.image" placeholder="New Profile Picture">
+        </div>
         <input type="submit" value="Save" class="btn btn-primary">
       </form>
     </div>
@@ -40,7 +44,8 @@ export default {
       user: {
               first_name: "",
               last_name: "",
-              email: ""
+              email: "",
+              image: ""
               },
       errors: []
     };
@@ -57,7 +62,8 @@ export default {
       var params = {
                     first_name: this.user.first_name,
                     last_name: this.user.last_name,
-                    email: this.user.email
+                    email: this.user.email,
+                    image: this.user.image
                     };
       axios.patch("/api/users/" + this.user.id, params)
         .then(response => {

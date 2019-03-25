@@ -1,9 +1,16 @@
 <template>
   <div class="users-show">
-    <h2>{{ user.first_name }}</h2>
-      <div>
-        <button v-on:click="connect()" class="btn btn-primary">Connect</button>
-      </div>
+    <div>
+      <h2>{{ user.first_name }}</h2>
+      <img :src="user.image" height="100" width="100">
+    </div>
+<!--     <div v-model="displayButton"> -->
+    <router-link v-if="user_id == user.id" class="btn btn-primary" v-bind:to="'/users/' + user.id + '/edit'">Update Profile</router-link>
+    <!-- </div> -->
+    <div>
+      <button v-if="user_id != user.id" id="myDIV" v-on:click="connect()" class="btn btn-primary">Follow</button>
+      <!-- <button v-if="user_id != user.id" v-on:click="connect()" class="btn btn-primary">Following</button> -->
+    </div>
     <h3>Currently Reading</h3>
     <div v-for="current_book in user.current_books">
       <!-- <ul> -->
@@ -27,6 +34,13 @@
 
   </div>
 </template>
+
+<style>
+  .profile-img{
+  height:50px;
+  width:50px;
+  }
+</style>
 
 <script>
 var axios = require("axios");
@@ -65,12 +79,26 @@ export default {
                           author_id: "",
                           summary: "",
                           genre: ""
-                        }]                  
+                        }]
+              // followees: [{
+              //             id: "",
+              //             first_name: "",
+              //             last_name: "",
+              //             image: "",
+              //           }],   
+              // followees: [{
+              //             id: "",
+              //             first_name: "",
+              //             last_name: "",
+              //             image: "",
+              //           }]                   
             },
+      user_id: "",      
       errors: []
     };
   },
   created: function() {
+    this.user_id = localStorage.getItem("user_id");
     axios.get('/api/users/' + this.$route.params.id)
       .then(response => {
         console.log(response.data);
@@ -88,8 +116,11 @@ export default {
     connect: function() {
       var params = { followee_id: this.user.id };
       axios.post("/api/followings/", params);
-    },
-  
+    }
   }
+  // displayButton: function() {
+  //   if user.id != current_user.id
+
+  // }
 };
 </script>

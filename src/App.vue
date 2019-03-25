@@ -15,6 +15,9 @@
                                   <router-link to="/">My Library</router-link>
                               </li>
                               <li class="nav-menu-item">
+                                  <router-link to="book_clubs">Create a Book Club</router-link>
+                              </li>
+                              <li class="nav-menu-item">
                                   <router-link to="/login">Login</router-link>
                               </li>
                               <li class="nav-menu-item">

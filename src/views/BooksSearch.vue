@@ -8,8 +8,10 @@
 
       <h3>Books</h3>
       <div v-for="item in books.items">
-        <img src="item.volumeInfo.imageLinks.thumbnail" class="thumbnail">
+        <router-link v-bind:to="item.selfLink">
         <h4>{{ item.volumeInfo.title }} {{ item.volumeInfo.subtitle }}</h4>
+        </router-link>
+        <img :src="item.volumeInfo.imageLinks.thumbnail">
         <p>by: {{ item.volumeInfo.authors }}</p>
         <p>Page Count: {{ item.volumeInfo.pageCount }}</p>
     </div>
@@ -35,7 +37,6 @@ export default {
                                     pageCount: "",
                                     authors: "",
                                     imageLinks: {
-                                                 smallThumbnail: "",
                                                  thumbnail: "",
                                     }
                 }
