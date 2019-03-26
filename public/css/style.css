@@ -876,6 +876,10 @@ form label.error {
     margin-bottom: 15px;
 }
 
+.mr-15{
+    margin-right: 15px;
+}
+
 .float-left {
     float: left;
 }
@@ -2134,7 +2138,7 @@ form label.error {
 .footer {
     background-color: #f7f7f7;
     color: #323232;
-    position: relative;
+    position: absolute;
     width: 100%;
     display: block;
 }
@@ -3842,6 +3846,7 @@ ul.project-detail-block, .project-detail-block ul {
         text-transform: uppercase;
         color: #999;
         font-size: 13px;
+        margin-bottom: 20px;shot
     }
 
         .blog-post .post-meta span, .comment-list .post-meta span {
@@ -4088,12 +4093,12 @@ ul.project-detail-block, .project-detail-block ul {
     position: relative;
 }
 
-.shop-detail-info h4 {
-    line-height: 26px;
+.shop-detail-info h3 {
+    line-height: px;
 }
 
 .shop-detail-info .shop-item-price {
-    font-size: 20px;
+    font-size: 18px;
     color: #e6ae49;
     font-weight: 600;
 }

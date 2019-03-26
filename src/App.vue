@@ -1,8 +1,14 @@
 <template>
   <div id="app">
 
+    <section id="preloader">
+        <div class="loader" id="loader">
+            <div class="loader-img"></div>
+        </div>
+    </section>
+
     <div class="wrapper">
-      <header id="header" class="header-transparent header--sticky header--dark" style="min-height: 84px;">
+      <header id="header" class="header-transparent header--dark" style="min-height: 84px;">
           <nav id="navigation" class="header-nav">
               <div class="container">
                   <div class="row d-flex flex-md-row align-items-center">
@@ -28,14 +34,35 @@
                               </li>
                           </ul>
                       </div>
+                      <div class="nav-icons">
+                          <div class="nav-icon-item d-lg-none">
+                              <span class="nav-icon-trigger menu-mobile-btn align-middle"><i class="ion"></i></span>
+                          </div>
+                      </div>
                   </div>
               </div>
           </nav>
         </header>
-      </div>
+
         <!-- End Header -->
 
-      <router-view/>
+        <!-- Intro Section -->
+<!--         <section class="inner-intro bg-image overlay-light parallax parallax-background1" data-background-img="img/syd-wachs-120737-unsplash.jpg">
+            <div class="container">
+                <div class="row title">
+                    <h2 class="h2">P</h2>
+                    <div class="page-breadcrumb">
+                        <a>Home</a>/<a>Portfolio</a>/<span>Grid</span>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+        <!-- End Intro Section -->
+
+      <div class='clearfix'>
+        <router-view/>
+      </div>
+
       <!-- FOOTER -->
       <footer class="footer">
           <div class="ptb-30">
@@ -48,13 +75,6 @@
                                   <img src="img/logo-black.png" />
                               </a>
                               <p>Bookends is a social media platform designed to build a community around what is typically an individual activity - reading.</p>
-                              <ul class="social">
-                                  <li><a target="_blank" href="https://www.twitter.com/"><i class="fa fa-twitter"></i></a></li>
-                                  <li><a target="_blank" href="https://instagram.com/"><i class="fa fa-instagram"></i></a></li>
-                                  <li><a target="_blank" href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
-                                  <li><a target="_blank" href="https://vimeo.com/"><i class="fa fa-vimeo-square"></i></a></li>
-                                  <li><a target="_blank" href="https://www.behance.net/"><i class="fa fa-behance"></i></a></li>
-                              </ul>
                           </div>
                       </div>
                       <div class="col-lg-6 col-md-4 col-sm-4">
@@ -83,19 +103,6 @@
               </div>
           </div>
           <hr />
-
-          <!-- Copyright Bar -->
-          <section class="copyright ptb-40">
-              <div class="container">
-                  <p class="">
-                      © 2018 <a><b>Mazel Template</b></a>. All Rights Reserved.
-                      <br />
-                      Template  by <a target="_blank" href="http://nileforest.com/"><b>nileforest</b></a>
-                  </p>
-              </div>
-          </section>
-          <!-- End Copyright Bar -->
-
       </footer>
       <!-- END FOOTER -->
 
@@ -110,9 +117,6 @@
     </div>
     <router-view/> -->
   </div>
-
-
-
 </template>
 
 <style>
@@ -135,4 +139,10 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+.clearfix{
+  min-height: 1500px
+}
+
+
 </style>

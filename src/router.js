@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import UsersShow from './views/UsersShow.vue'
-import UsersConnections from './views/UsersConnections.vue'
-import UsersLibrary from './views/UsersLibrary.vue'
 import UsersEdit from './views/UsersEdit.vue'
+import UsersLibrary from './views/UsersLibrary.vue'
+import Followings from './views/Followings.vue'
 import BooksIndex from './views/BooksIndex.vue'
 import BooksShow from './views/BooksShow.vue'
 import BooksSearch from './views/BooksSearch.vue'
@@ -23,8 +23,8 @@ export default new Router({
 
     { path: "/users/:id", name: "users-show", component: UsersShow },
     { path: '/users/:id/edit', name: 'users-edit', component: UsersEdit },
-    { path: '/users/:id/connections', name: 'users-connections', component: UsersConnections},
     { path: '/', name: 'users-library', component: UsersLibrary },
+    { path: '/users/:id/followings', name: 'followings', component: Followings},
     { path: "/books", name: "books-index", component: BooksIndex },
     { path: "/books/:id", name: "books-show", component: BooksShow },
     { path: "/search", name: "search", component: BooksSearch},

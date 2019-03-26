@@ -1,6 +1,6 @@
 <template>
   <div class="book-clubs-new">
-    <h1>Create a Book Club</h1>
+    <h2>Create a Book Club</h2>
     <ul>
       <li v-for="error in errors">{{ error }}</li>
     </ul>

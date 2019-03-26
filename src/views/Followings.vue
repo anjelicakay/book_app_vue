@@ -1,12 +1,17 @@
 <template>
-  <div class="users-connections">
+  <div class="followings">
+<!--     <h2>Add Friends</h2>
+    <form v-on:submit.prevent="submit()">
+      <input v-model="searchTerm" placeholder="Enter name or email">
+      <input type="submit" value="Go">
+    </form> -->
     <div>
       <h3>{{ user.first_name }}'s Friends</h3>
-        <div v-for="follower in user.followers"> 
+<!--         <div v-for="follower in user.followers"> 
           <router-link v-bind:to="'/users/' + follower.id">
             <h4> {{follower.first_name}} {{follower.last_name}}</h4>
           </router-link>
-        </div>
+        </div> -->
         <div v-for="followee in user.followees"> 
           <img :src="followee.image" height="100" width="100">
           <router-link v-bind:to="'/users/' + followee.id">
@@ -47,13 +52,13 @@ export default {
       },
       errors: []
     };
-  },  created: function() {
+  },  
+  created: function() {
     axios.get("/api/users/" + this.$route.params.id)
     .then(response => {
       this.user = response.data;
     });
   },
-
   methods: {}
 };
 </script>
