@@ -105,7 +105,6 @@ export default {
           .get("/api/google/books?search=" + newSearchTerm)
           .then(response => {
             this.books = response.data;
-            // this.searchTerm = "";
           });
       },
       selectBook: function(book) {

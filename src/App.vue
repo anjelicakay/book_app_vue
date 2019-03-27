@@ -48,12 +48,7 @@
         <!-- End Header -->
 
         <!-- Intro Section -->
-        <section class="inner-intro bg-image overlay-light parallax parallax-background1" data-background-img="img/book_background.jpg">
-          <div class="container">
-              <div class="row title">
-                  <h2 class="h2"></h2>
-              </div>
-          </div>
+        <section class="inner-intro bg-image overlay-light parallax parallax-background1" data-background-img="/img/book_background.jpg">
         </section>
         <!-- End Intro Section -->
 

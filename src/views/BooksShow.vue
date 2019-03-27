@@ -62,14 +62,14 @@
                                       <div class="post-comment">
                                         <div v-for="review in book.reviews">
                                           <div class="comment-list mb-30 mt-15">   
-                                            <div class="comment-avatar">
+                                            <div class="comment-avatar ml-30">
                                                 <img :src="review.user.image">
                                             </div>
                                               <div class="">
                                                 <div class="ml-30">
                                                   <h6>{{ review.user.first_name }} {{ review.user.last_name }}</h6>
                                                   <div class="post-meta">
-                                                      <div class="star-rat">
+                                                      <div class="star-placement">
                                                           <star-rating v-model="review.rating" v-bind:increment="0.5" v-bind:max-rating="5" v-bind:read-only="true" v-bind:show-rating="false" star-size="25"></star-rating>
                                                       </div>
                                                   </div>
@@ -92,6 +92,12 @@
       </section>
   </div>
 </template>
+
+<style>
+  .star-placement{
+    margin-left: 40px;
+  }
+</style>
 
 <script>
 var axios = require("axios");
@@ -136,15 +142,11 @@ export default {
     };
   },
   created: function() {
-    // axios.get('/api/books/' + this.$route.params.id)
-    //   .then(response => {
-    //     console.log(response.data);
-    //     this.book = response.data;
-    //   });
     axios
       .get("/api/books/" + this.$route.params.id)
       .then(response => {
         this.book = response.data;
+        this.book.summary = this.book.summary.replace(/<.>|<..>/g, '')
       });
   },
   methods: {
