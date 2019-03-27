@@ -11,10 +11,11 @@
             </div>
             <div class="mt-30">
               <h4>Add to My Library</h4>
-              <button v-on:click="libraryToRead()" class="btn btn-xs btn-color-a mr-15 ">Want to Read</button>
-              <button v-on:click="libraryRead()" class="btn btn-xs btn-color-a mb-15">Read</button>
-              <button v-on:click="libraryCurrentRead()" class="btn btn-xs btn-color-a" >Currently Reading</button>
+              <button v-on:click="updateReadStatus('want_to_read')"       v-bind:class="{'btn-selected': book.inventory.status == 'want_to_read', 'btn-color-a': book.inventory.status != 'want_to_read'}"  class="btn btn-xs mr-15">Want to Read</button>
+              <button v-on:click="updateReadStatus('read')"               v-bind:class="{'btn-selected': book.inventory.status == 'read', 'btn-color-a': book.inventory.status != 'read'}"                  class="btn btn-xs mb-15">Read</button>
+              <button v-on:click="updateReadStatus('currently_reading')"  v-bind:class="{'btn-selected': book.inventory.status == 'currently_reading', 'btn-color-a': book.inventory.status != 'currently_reading'}"  class="btn btn-xs" >Currently Reading</button>
             </div>
+
             <div class="project-detail-block ptb-15">
               <strong class="dark-color">Genre: </strong><span>{{ book.genre }}</span>              
             </div>
@@ -29,9 +30,9 @@
                 <p class="ptb-15" id="summary-alignment">{{ book.summary }}</p>
 
                 <div class="tabs mt-15">
-                    <ul>
+<!--                     <ul>
                         <li><a href="#tabs-1">Reviews</a></li>
-                    </ul>
+                    </ul> -->
 
                     <div class="ui-tab-content">
                       <div id="tabs-1">
@@ -39,7 +40,7 @@
                           <form v-on:submit.prevent="submit()">
                             <div class="post-comment-star">
                               <div class="star-rat">
-                                 Rating: <star-rating v-model="rating" v-bind:increment="0.5" v-bind:max-rating="5" v-bind:read-only="false" v-bind:show-rating="false" star-size="25"></star-rating>
+                                 Rating: <star-rating v-model="rating" v-bind:increment="0.5" v-bind:max-rating="5" v-bind:read-only="false" v-bind:show-rating="false" :star-size="25"></star-rating>
                               </div>
                             </div>
                             <!-- <div class="clearfix"></div> -->
@@ -57,7 +58,7 @@
                                       <h6>{{ review.user.first_name }} {{ review.user.last_name }}</h6>
                                       <div class="post-meta">
                                         <div class="star-placement">
-                                          <star-rating v-model="review.rating" v-bind:increment="0.5" v-bind:max-rating="5" v-bind:read-only="true" v-bind:show-rating="false" star-size="25"></star-rating>
+                                          <star-rating v-model="review.rating" v-bind:increment="0.5" v-bind:max-rating="5" v-bind:read-only="true" v-bind:show-rating="false" :star-size="25"></star-rating>
                                         </div>
                                       </div>
                                       <div >
@@ -87,6 +88,11 @@
   #summary-alignment{
     text-align: justify;
   }
+
+  .btn-selected {
+    background-color: #85886F;
+    color: white;
+  }
 </style>
 
 <script>
@@ -110,7 +116,7 @@ export default {
               reviews: [{
                         user_id: "",
                         book_id: "",
-                        rating: "",
+                        // rating: "",
                         content: "",
                         user: {
                                 first_name: "",
@@ -118,7 +124,11 @@ export default {
                                 email: "",
                                 image: ""
                               }
-                        }]   
+                        }],
+              inventory: {
+                          id: "",
+                          status: ""
+                        }   
       },
       inventories: [{
                       id: "",
@@ -132,6 +142,7 @@ export default {
     };
   },
   created: function() {
+    var user_id = localStorage.getItem("user_id");
     axios
       .get("/api/books/" + this.$route.params.id)
       .then(response => {
@@ -155,38 +166,15 @@ export default {
           this.errors = error.response.data.errors;
         });              
     },
-    libraryCurrentRead: function() {
-      var user_id = localStorage.getItem("user_id");
-      var status = 0
-      console.log("Add to library")
+    updateReadStatus: function(status) {
       var params = { 
-                    user_id: this.user_id,
-                    book_id: this.book.id,
-                    status: 0
+                    status: status
                   };
-      axios.post("/api/inventories/", params);
-    },
-    libraryToRead: function() {
-      var user_id = localStorage.getItem("user_id");
-      var status = 1
-      console.log("Add to library")
-      var params = { 
-                    user_id: this.user_id,
-                    book_id: this.book.id,
-                    status: 1 
-                  };
-      axios.post("/api/inventories/", params);
-    },
-    libraryRead: function() {
-      var user_id = localStorage.getItem("user_id");
-      var status = 2
-      console.log("Add to library")
-      var params = { 
-                    user_id: this.user_id,
-                    book_id: this.book.id,
-                    status: 2
-                  };
-      axios.post("/api/inventories/", params);
+      axios.patch("/api/inventories/" + this.book.inventory.id, params)
+        .then(response => {
+          console.log(response.data);
+          this.book.inventory = response.data;
+        });
     }
   }
 };

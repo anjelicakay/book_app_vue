@@ -3,45 +3,37 @@
     <section>
       <div class="container">
         <div class="row mt-30">
-          <div class="col-md-6">
-            <h2>{{ user.first_name }}</h2>
-            <img :src="user.image" height="230" width="150">
-            <div class="padding">
-              <router-link v-if="user_id == user.id" class="btn btn-primary" v-bind:to="'/users/' + user.id + '/edit'">Update Profile</router-link>
-            <div>
-              <button v-if="user_id != user.id" v-on:click="connect()" class="btn btn-primary">Follow</button> 
+          <div class="col-sm-4">
+              <h3>{{ user.first_name }}</h3>
+              <img :src="user.image" height="400" width="300">
+              <div class="padding">
+                <router-link v-if="user_id == user.id" class="btn btn-primary" v-bind:to="'/users/' + user.id + '/edit'">Update Profile</router-link>
+              <div>
+                <button v-if="user_id != user.id" v-on:click="connect()" class="btn btn-primary">Follow</button> 
+              </div>
             </div>
           </div>
-            <!-- Accordion -->
-            <div>
-                <div class="accordion">
-                    <div class="accordion-section">
-                        <h6 v-if="user_id == user.id" class="accordion-title">My Friends</h6>
-                        <h6 v-else class="accordion-title">{{ user.first_name}}'s Friends</h6>
-                        <div class="accordion-content">
-<!--                               <div v-for="followee in user.followees"> 
-                            <router-link v-bind:to="'/users/' + followee.id">
-                              <h6>{{followee.first_name}} {{followee.last_name}}   <span class="btn btn-color-a" v-on:click="destroyFollowing(friend)">Unfollow</span></h6>
-                            </router-link>
-                          </div> -->
-                          <ul>
-                            <li v-for="friend in user.followees">{{ friend.first_name }} {{ friend.last_name }} <span class="btn btn-color-a" v-on:click="destroyFollowing(friend)">Unfollow</span></li>
-                          </ul>
-                        </div>
-                    </div>
-                    <div v-if="user_id == user.id" class="accordion-section">
-                        <h6 class="accordion-title">My Book Clubs</h6>
-                        <div class="accordion-content">
-                          <div v-for="book_club in user.book_clubs">
-                            <router-link v-bind:to="'/book_clubs/' + book_club.id">{{ book_club.name }}</router-link>
-                          </div>
-                        </div>
-                    </div>
-                </div>
-            </div>  
+          <div class="col-sm-4">
+            <h3>Book Clubs</h3>
+            <div v-for="book_club in user.book_clubs">
+              <router-link class="btn btn-primary" v-bind:to="'/book_clubs/' + book_club.id">{{ book_club.name }}</router-link>
             </div>
+          </div>
+          <div class="col-sm-4"">
+            <h3 v-if="user_id == user.id">My Friends</h3>
+            <h3 v-else>{{ user.first_name}}'s Friends</h3>
+              <div v-for="followee in user.followees">
+                <router-link v-bind:to="'/users/' + followee.id">
+                 {{ followee.first_name }} {{ followee.last_name }} 
+                </router-link>
+                <span class="btn btn-color-a" v-on:click="destroyFollowing(friend)">Unfollow</span>
+              </div>
+              <!-- <p v-for="friend in user.followees"> -->
+                <!-- {{ friend.first_name }} {{ friend.last_name }}  -->
+              <!-- </p> -->
           </div>
         </div>
+      </div>
     </section>
 
 
@@ -111,6 +103,7 @@
   .padding{
     padding: 25px;
   }
+
 </style>
 
 <script>

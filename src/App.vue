@@ -62,18 +62,12 @@
               <div class="container">
                   <!--Footer Info -->
                   <div class="row footer-info">
-                      <div class="col-lg-6 col-md-12 col-sm-12">
+                      <div class="col-lg-12 col-md-12 col-sm-12">
                           <div class="footer-block">
-                              <a class="footer-logo mb-25" href="home.html">
-                                  <img src="img/logo-black.png" />
+                              <a class="footer-logo">
+                                  <img class="sizing" src="/img/bookends_logo.png"/>
                               </a>
                               <p>Bookends is a social media platform designed to build a community around what is typically an individual activity - reading.</p>
-                          </div>
-                      </div>
-                      <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="footer-block">
-                              <h6 class="link-title">Contact</h6>
-                              <p>215 W. Ohio St., Chicago, IL 60654</p>
                           </div>
                       </div>
                   </div>
@@ -122,5 +116,8 @@
   min-height: 1500px
 }
 
+.sizing{
+  height: 70px;
+}
 
 </style>
