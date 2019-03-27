@@ -1,11 +1,12 @@
 <template>
   <div id="app">
 
-    <section id="preloader">
+<!--     <section id="preloader">
         <div class="loader" id="loader">
             <div class="loader-img"></div>
         </div>
-    </section>
+    </section> -->
+
 
     <div class="wrapper">
       <header id="header" class="header-transparent header--dark" style="min-height: 84px;">
@@ -47,16 +48,13 @@
         <!-- End Header -->
 
         <!-- Intro Section -->
-<!--         <section class="inner-intro bg-image overlay-light parallax parallax-background1" data-background-img="img/syd-wachs-120737-unsplash.jpg">
-            <div class="container">
-                <div class="row title">
-                    <h2 class="h2">P</h2>
-                    <div class="page-breadcrumb">
-                        <a>Home</a>/<a>Portfolio</a>/<span>Grid</span>
-                    </div>
-                </div>
-            </div>
-        </section> -->
+        <section class="inner-intro bg-image overlay-light parallax parallax-background1" data-background-img="img/book_background.jpg">
+          <div class="container">
+              <div class="row title">
+                  <h2 class="h2"></h2>
+              </div>
+          </div>
+        </section>
         <!-- End Intro Section -->
 
       <div class='clearfix'>

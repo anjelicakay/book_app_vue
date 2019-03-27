@@ -6,18 +6,17 @@
             <div class="loader-img"></div>
         </div>
     </section> -->
-    
-    <section class="inner-intro bg-image overlay-light parallax parallax-background1" data-background-img="img/book_background.jpg">
+
         <div class="container">
             <div class="row title">
-              <h2>Book Search</h2>
-              <form v-on:submit.prevent="submit()">
+              <h2 id="book-search">Book Search</h2>
+              <form id="search-bar" v-on:submit.prevent="submit()">
                 <input v-model="searchTerm" placeholder="Enter title">
                 <input type="submit" value="Go">
               </form>
             </div>
         </div>
-    </section>
+
     
 
     <section class="ptb ptb-sm-80">
@@ -60,6 +59,16 @@
 <style>
 .results-container{
   margin-bottom: 40px;
+}
+#book-search{
+  margin-left: 450px;
+  margin-top: -300px;
+  z-index: 2;
+}
+#search-bar{
+  margin-top: -250px;
+  margin-left: -180px;
+  z-index: 2;
 }
 </style>
 
