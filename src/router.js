@@ -4,10 +4,8 @@ import UsersShow from './views/UsersShow.vue'
 import UsersEdit from './views/UsersEdit.vue'
 import UsersLibrary from './views/UsersLibrary.vue'
 import Followings from './views/Followings.vue'
-import BooksIndex from './views/BooksIndex.vue'
 import BooksShow from './views/BooksShow.vue'
 import BooksSearch from './views/BooksSearch.vue'
-import AuthorsShow from './views/AuthorsShow.vue'
 import BookClubsShow from './views/BookClubsShow.vue'
 import BookClubsNew from './views/BookClubsNew.vue'
 import Signup from './views/Signup.vue'
@@ -25,10 +23,8 @@ export default new Router({
     { path: '/users/:id/edit', name: 'users-edit', component: UsersEdit },
     { path: '/', name: 'users-library', component: UsersLibrary },
     { path: '/users/:id/followings', name: 'followings', component: Followings},
-    { path: "/books", name: "books-index", component: BooksIndex },
     { path: "/books/:id", name: "books-show", component: BooksShow },
     { path: "/search", name: "search", component: BooksSearch},
-    { path: "/authors/:id", name: "authors-show", component: AuthorsShow },
     { path: "/book_clubs/:id", name: "book-clubs-show", component: BookClubsShow },
     { path: "/book_clubs", name: "book-clubs-new", component: BookClubsNew},
     { path: "/signup", name: "signup", component: Signup },

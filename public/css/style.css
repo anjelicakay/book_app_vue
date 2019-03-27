@@ -730,6 +730,11 @@ form label.error {
     padding-bottom: 15px;
 }
 
+.ptb-10 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 .pt-15 {
     padding-top: 15px;
 }
@@ -850,11 +855,6 @@ form label.error {
     margin-right: 30px;
 }
 
-.mr-140 {
-    margin-right: 140px;
-}
-
-
 .mtb-25 {
     margin-top: 25px;
     margin-bottom: 25px;
@@ -871,6 +871,11 @@ form label.error {
 .mtb-15 {
     margin-top: 15px;
     margin-bottom: 15px;
+}
+
+.mtb-10 {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .mt-15 {
@@ -4098,7 +4103,8 @@ ul.project-detail-block, .project-detail-block ul {
     position: relative;
 }
 
-.shop-detail-info h3 {
+.
+ h3 {
     line-height: px;
 }
 

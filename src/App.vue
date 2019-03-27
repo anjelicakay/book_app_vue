@@ -62,7 +62,7 @@
               <div class="container">
                   <!--Footer Info -->
                   <div class="row footer-info">
-                      <div class="col-lg-3 col-md-12 col-sm-12">
+                      <div class="col-lg-6 col-md-12 col-sm-12">
                           <div class="footer-block">
                               <a class="footer-logo mb-25" href="home.html">
                                   <img src="img/logo-black.png" />
@@ -70,25 +70,10 @@
                               <p>Bookends is a social media platform designed to build a community around what is typically an individual activity - reading.</p>
                           </div>
                       </div>
-                      <div class="col-lg-6 col-md-4 col-sm-4">
-                          <div class="footer-block">
-                              <h6 class="link-title">Company</h6>
-                              <ul class="link">
-                                  <li><a href="#">About Company</a></li>
-                                  <li><a href="#">Our Team</a></li>
-                                  <li><a href="#">FAQ</a></li>
-                              </ul>
-                          </div>
-                      </div>
-
-                      <div class="col-lg-3 col-md-6 col-sm-12">
+                      <div class="col-lg-6 col-md-6 col-sm-12">
                           <div class="footer-block">
                               <h6 class="link-title">Contact</h6>
                               <p>215 W. Ohio St., Chicago, IL 60654</p>
-                              <ul class="link">
-                                  <li><a href="mailto:yourname@domain.com"><i class="fa fa-envelope-o left"></i>contact@bookends.com</a></li>
-                                  <li><a><i class="fa fa-phone left"></i>312/555-1223</a></li>
-                              </ul>
                           </div>
                       </div>
                   </div>

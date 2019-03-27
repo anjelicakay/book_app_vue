@@ -1,22 +1,27 @@
 <template>
   <div class="book-clubs-new">
-    <h2>Create a Book Club</h2>
-    <ul>
-      <li v-for="error in errors">{{ error }}</li>
-    </ul>
-    <form v-on:submit.prevent="submit()">
-      <div>
-        Name: <input v-model="newBookClubName">
-      </div>
-      <div>
-        Book: <input v-model="newBookClubBookId">
-      </div>
-      <input type="submit" value="Create" class="btn btn-warning">
-    </form>
+    <div id="container">
+      <h2>Create a Book Club</h2>
+      <ul>
+        <li v-for="error in errors">{{ error }}</li>
+      </ul>
+      <form v-on:submit.prevent="submit()">
+        <div>
+          Name: <input v-model="newBookClubName">
+        </div>
+        <div>
+          Book: <input v-model="newBookClubBookId">
+        </div>
+        <input type="submit" value="Create" class="btn btn-warning">
+      </form>
+    </div>
   </div>
 </template>
 
 <style>
+#conatiner{
+  padding-top: 50px;
+}
 </style>
 
 <script>

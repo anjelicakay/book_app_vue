@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <div class="container">
+    <div class="container" id="padding">
       <form v-on:submit.prevent="submit()">
         <h1>Login</h1>
         <ul>
@@ -20,6 +20,12 @@
     </div>
   </div>
 </template>
+
+<style>
+  #container{
+    padding-top: 50px;
+  }
+</style>
 
 <script>
 import axios from "axios";

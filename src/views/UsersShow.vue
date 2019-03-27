@@ -1,48 +1,49 @@
 <template>
   <div class="users-show">
-    <div>
-      <h2>{{ user.first_name }}</h2>
-      <img :src="user.image" height="100" width="100">
-    </div>
-    <div>
-      <router-link v-if="user_id == user.id" class="btn btn-primary" v-bind:to="'/users/' + user.id + '/edit'">Update Profile</router-link>
-    </div>
-    <div>
-      <button v-on:click="connect()" class="btn btn-primary">Follow</button> 
-    </div>
-<!--     <div >
-      <router-link v-if="user_id == user.id" class="btn btn-primary" v-bind:to="'/users/' + user.id + '/followings'">My Friends</router-link>
-      <router-link v-else class="btn btn-primary" v-bind:to="'/users/' + user.id + '/followings'">{{ user.first_name}}'s Friends</router-link>
-    </div> -->
-    <div>
-      <h4 v-if="user_id == user.id">My Friends</h4>
-      <h4 v-else>{{ user.first_name}}'s Friends</h4>
-      <ul>
-        <li v-for="friend in user.followees">{{ friend.first_name }} {{ friend.last_name }} <span class="btn btn-warning" v-on:click="destroyFollowing(friend)">Unfollow</span></li>
-      </ul>
-    </div>
-
-    <div v-if="user_id == user.id" class="accordion d-flex justify-content-center">
-      <div class="card z-depth-0 bordered">
-        <div class="card-header" id="headingOne2">
-          <h5 class="mb-0">
-            <button class="btn btn-link d-flex justify-content-center" type="button" data-toggle="collapse" data-target="#collapseOne2"
-              aria-expanded="true" aria-controls="collapseOne2">
-              My Book Clubs
-            </button>
-          </h5>
-        </div>
-        <div id="collapseOne2" class="collapse" aria-labelledby="headingOne2" data-parent="#accordionExample275">
-          <div class="card-body">
-            <div class="container">
-              <div v-for="book_club in user.book_clubs">
-            <router-link class="btn btn-primary" v-bind:to="'/book_clubs/' + book_club.id">{{ book_club.name }}</router-link>
+    <section>
+      <div class="container">
+        <div class="row mt-30">
+          <div class="col-md-6">
+            <h2>{{ user.first_name }}</h2>
+            <img :src="user.image" height="230" width="150">
+            <div class="padding">
+              <router-link v-if="user_id == user.id" class="btn btn-primary" v-bind:to="'/users/' + user.id + '/edit'">Update Profile</router-link>
+            <div>
+              <button v-if="user_id != user.id" v-on:click="connect()" class="btn btn-primary">Follow</button> 
+            </div>
+          </div>
+            <!-- Accordion -->
+            <div>
+                <div class="accordion">
+                    <div class="accordion-section">
+                        <h6 v-if="user_id == user.id" class="accordion-title">My Friends</h6>
+                        <h6 v-else class="accordion-title">{{ user.first_name}}'s Friends</h6>
+                        <div class="accordion-content">
+<!--                               <div v-for="followee in user.followees"> 
+                            <router-link v-bind:to="'/users/' + followee.id">
+                              <h6>{{followee.first_name}} {{followee.last_name}}   <span class="btn btn-color-a" v-on:click="destroyFollowing(friend)">Unfollow</span></h6>
+                            </router-link>
+                          </div> -->
+                          <ul>
+                            <li v-for="friend in user.followees">{{ friend.first_name }} {{ friend.last_name }} <span class="btn btn-color-a" v-on:click="destroyFollowing(friend)">Unfollow</span></li>
+                          </ul>
+                        </div>
+                    </div>
+                    <div v-if="user_id == user.id" class="accordion-section">
+                        <h6 class="accordion-title">My Book Clubs</h6>
+                        <div class="accordion-content">
+                          <div v-for="book_club in user.book_clubs">
+                            <router-link v-bind:to="'/book_clubs/' + book_club.id">{{ book_club.name }}</router-link>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    </div>
+    </section>
+
 
     <section class="ptb ptb-sm-80">
       <div class="container">
@@ -106,6 +107,9 @@
   .profile-img{
   height:50px;
   width:50px;
+  }
+  .padding{
+    padding: 25px;
   }
 </style>
 
@@ -188,7 +192,7 @@ export default {
       .then(response => {
         console.log(response.data);
       }).catch(errors => {
-        console.log(errors.response.data.errors);
+        console.log(errors.response.data.errors); 
       })    
     },
     destroyFollowing: function(friend) {
