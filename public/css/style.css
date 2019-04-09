@@ -852,6 +852,11 @@ form label.error {
     margin-left: 30px;
 }
 
+.ml-50 {
+    margin-left: 50px;
+}
+
+
 .mr-30 {
     margin-right: 30px;
 }
@@ -3988,8 +3993,16 @@ ul.project-detail-block, .project-detail-block ul {
     }
 
         .post-comment .comment-list h6 {
-            margin-top: 0px;
+            margin-top: 15px;
             margin-bottom: 3px;
+            margin-left: 41px;
+            text-align: left; 
+        }
+
+        .post-comment .comment-list p {
+            margin-top: 8px;
+            margin-left: 30px;
+            text-align: left; 
         }
 
         .post-comment .comment-list li:first-child {

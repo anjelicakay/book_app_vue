@@ -10,10 +10,18 @@
               </div>
             </div>
             <div class="mt-30">
-              <h4>Add to My Library</h4>
-              <button v-on:click="updateReadStatus('want_to_read')"       v-bind:class="{'btn-selected': book.inventory.status == 'want_to_read', 'btn-color-a': book.inventory.status != 'want_to_read'}"  class="btn btn-xs mr-15">Want to Read</button>
-              <button v-on:click="updateReadStatus('read')"               v-bind:class="{'btn-selected': book.inventory.status == 'read', 'btn-color-a': book.inventory.status != 'read'}"                  class="btn btn-xs mb-15">Read</button>
-              <button v-on:click="updateReadStatus('currently_reading')"  v-bind:class="{'btn-selected': book.inventory.status == 'currently_reading', 'btn-color-a': book.inventory.status != 'currently_reading'}"  class="btn btn-xs" >Currently Reading</button>
+              <div v-if="book.inventory">
+                <h4>Read Status</h4>
+                <button v-on:click="updateReadStatus('want_to_read')"       v-bind:class="{'btn-selected': book.inventory.status == 'want_to_read', 'btn-color-a': book.inventory.status != 'want_to_read'}"  class="btn btn-xs mr-15">Want to Read</button>
+                <button v-on:click="updateReadStatus('read')"               v-bind:class="{'btn-selected': book.inventory.status == 'read', 'btn-color-a': book.inventory.status != 'read'}"                  class="btn btn-xs mb-15">Read</button>
+                <button v-on:click="updateReadStatus('currently_reading')"  v-bind:class="{'btn-selected': book.inventory.status == 'currently_reading', 'btn-color-a': book.inventory.status != 'currently_reading'}"  class="btn btn-xs" >Currently Reading</button>
+              </div>
+              <div v-else>
+                <h4>Add to My Library</h4>
+                <button v-on:click="createReadStatus('want_to_read')"   class="btn btn-xs mr-15 btn-color-a">Want to Read</button>
+                <button v-on:click="createReadStatus('read')"  class="btn btn-xs mb-15 btn-color-a">Read</button>
+                <button v-on:click="createReadStatus('currently_reading')"  class="btn btn-xs btn-color-a" >Currently Reading</button>
+              </div>
             </div>
 
             <div class="project-detail-block ptb-15">
@@ -30,50 +38,42 @@
                 <p class="ptb-15" id="summary-alignment">{{ book.summary }}</p>
 
                 <div class="tabs mt-15">
-<!--                     <ul>
-                        <li><a href="#tabs-1">Reviews</a></li>
-                    </ul> -->
-
-                    <div class="ui-tab-content">
-                      <div id="tabs-1">
-                        <h5>Write a Review</h5>
-                          <form v-on:submit.prevent="submit()">
-                            <div class="post-comment-star">
-                              <div class="star-rat">
-                                 Rating: <star-rating v-model="rating" v-bind:increment="0.5" v-bind:max-rating="5" v-bind:read-only="false" v-bind:show-rating="false" :star-size="25"></star-rating>
-                              </div>
-                            </div>
-                            <!-- <div class="clearfix"></div> -->
-                            <textarea placeholder="Review" v-model="newReviewContent" required="" class="form-full mb-15"></textarea>
-                            <input type="submit" class="btn btn-xs btn-black" value="Submit">
-                          </form>
-                          <div class="post-comment">
-                            <div v-for="review in book.reviews">
-                              <div class="comment-list mb-30 mt-15">   
-                                <div class="comment-avatar ml-30">
-                                    <img :src="review.user.image">
-                                </div>
-                                  <div class="">
-                                    <div class="ml-30">
-                                      <h6>{{ review.user.first_name }} {{ review.user.last_name }}</h6>
-                                      <div class="post-meta">
-                                        <div class="star-placement">
-                                          <star-rating v-model="review.rating" v-bind:increment="0.5" v-bind:max-rating="5" v-bind:read-only="true" v-bind:show-rating="false" :star-size="25"></star-rating>
-                                        </div>
-                                      </div>
-                                      <div >
-                                        <p>{{ review.content }}</p>
-                                      </div>
-                                    </div>  
-                                  <hr />
-                                </div>
-                              </div>
+                  <div class="ui-tab-content">
+                    <div id="tabs-1">
+                      <h5>Write a Review</h5>
+                        <form v-on:submit.prevent="submit()">
+                          <div class="post-comment-star">
+                            <div class="star-rat">
+                               Rating: <star-rating v-model="rating" v-bind:increment="0.5" v-bind:max-rating="5" v-bind:read-only="false" v-bind:show-rating="false" :star-size="25"></star-rating>
                             </div>
                           </div>
-                      </div>
+                          <!-- <div class="clearfix"></div> -->
+                          <textarea placeholder="Review" v-model="newReviewContent" required="" class="form-full mb-15"></textarea>
+                          <input type="submit" class="btn btn-xs btn-black" value="Submit">
+                        </form>
+                        <div class ="post-comment mb-30 mt-15">
+                          <div class="comment-list">    
+                            <div v-for="review in book.reviews">
+                              <div class="comment-avatar ml-30">
+                                <img :src="review.user.image">
+                              </div>  
+                              <div class="ml-50">
+                                <h6>{{ review.user.first_name }} {{ review.user.last_name }}</h6>
+                                <div class="star-placement">
+                                  <star-rating v-model="review.rating" v-bind:increment="0.5" v-bind:max-rating="5" v-bind:read-only="true" v-bind:show-rating="false" :star-size="25"></star-rating>
+                                </div>
+                              </div>
+                              <div>
+                                <p>{{ review.content }}</p>
+                              </div>
+                              <hr />
+                            </div>
+                          </div>
+                        </div>
                     </div>
+                  </div>
                 </div>
-            </div>
+              </div>
           </div>
         </div>
       </div>
@@ -171,6 +171,19 @@ export default {
                     status: status
                   };
       axios.patch("/api/inventories/" + this.book.inventory.id, params)
+        .then(response => {
+          console.log(response.data);
+          this.book.inventory = response.data;
+        });
+    },
+    createReadStatus: function(status) {
+      var user_id = localStorage.getItem("user_id");
+      var params = { 
+                    user_id: user_id,
+                    book_id: this.$route.params.id,
+                    status: status
+                  };
+      axios.post("/api/inventories" , params)
         .then(response => {
           console.log(response.data);
           this.book.inventory = response.data;
