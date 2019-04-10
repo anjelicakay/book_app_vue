@@ -14,7 +14,8 @@
                 <h4>Read Status</h4>
                 <button v-on:click="updateReadStatus('want_to_read')"       v-bind:class="{'btn-selected': book.inventory.status == 'want_to_read', 'btn-color-a': book.inventory.status != 'want_to_read'}"  class="btn btn-xs mr-15">Want to Read</button>
                 <button v-on:click="updateReadStatus('read')"               v-bind:class="{'btn-selected': book.inventory.status == 'read', 'btn-color-a': book.inventory.status != 'read'}"                  class="btn btn-xs mb-15">Read</button>
-                <button v-on:click="updateReadStatus('currently_reading')"  v-bind:class="{'btn-selected': book.inventory.status == 'currently_reading', 'btn-color-a': book.inventory.status != 'currently_reading'}"  class="btn btn-xs" >Currently Reading</button>
+                <button v-on:click="updateReadStatus('currently_reading')"  v-bind:class="{'btn-selected': book.inventory.status == 'currently_reading', 'btn-color-a': book.inventory.status != 'currently_reading'}"  class="btn btn-xs mb-15" >Currently Reading</button>
+                <button v-on:click="destroyStatus()" class="btn btn-xs btn-color-a" >Remove From Library</button>
               </div>
               <div v-else>
                 <h4>Add to My Library</h4>
@@ -59,6 +60,9 @@
                               </div>  
                               <div class="ml-50">
                                 <h6>{{ review.user.first_name }} {{ review.user.last_name }}</h6>
+                                <!-- <div v-if="user_id == user.id"> -->
+                                  <span class="btn btn-color-a" v-on:click="destroyReview()">Delete Review</span>
+                                <!-- </div> -->
                                 <div class="star-placement">
                                   <star-rating v-model="review.rating" v-bind:increment="0.5" v-bind:max-rating="5" v-bind:read-only="true" v-bind:show-rating="false" :star-size="25"></star-rating>
                                 </div>
@@ -114,6 +118,7 @@ export default {
                         name: ""
                       },
               reviews: [{
+                        id: "",
                         user_id: "",
                         book_id: "",
                         // rating: "",
@@ -138,6 +143,9 @@ export default {
                     }],
       newReviewContent: "",
       rating: 0,
+      user: {
+              id: ""
+            },
       errors: []
     };
   },
@@ -188,7 +196,22 @@ export default {
           console.log(response.data);
           this.book.inventory = response.data;
         });
-    }
+    },
+    destroyStatus: function() {
+      axios.delete("/api/inventories/" + this.book.inventory.id)
+        .then(response => {
+          console.log("Success", response.data);
+          this.$router.push("/");
+        });
+    },
+    destroyReview: function() {
+      // this.user_id = localStorage.getItem("user_id")
+      axios.delete("/api/reviews/" + this.book.review.id)
+        .then(response => {
+          console.log("Success", response.data);
+          // this.$router.push("/")
+        });
+    }    
   }
 };
 </script>

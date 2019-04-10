@@ -20,17 +20,23 @@
             </div>
           </div>
           <div class="col-sm-4"">
-            <h3 v-if="user_id == user.id">My Friends</h3>
-            <h3 v-else>{{ user.first_name}}'s Friends</h3>
-              <div v-for="followee in user.followees">
-                <router-link v-bind:to="'/users/' + followee.id">
-                 {{ followee.first_name }} {{ followee.last_name }} 
-                </router-link>
-                <span class="btn btn-color-a" v-on:click="destroyFollowing(friend)">Unfollow</span>
-              </div>
-              <!-- <p v-for="friend in user.followees"> -->
-                <!-- {{ friend.first_name }} {{ friend.last_name }}  -->
-              <!-- </p> -->
+            <div v-if="user_id == user.id">
+              <h3>My Friends</h3>
+                <div v-for="followee in user.followees">
+                  <router-link v-bind:to="'/users/' + followee.id">
+                   {{ followee.first_name }} {{ followee.last_name }} 
+                  </router-link>
+                  <span class="btn btn-color-a" v-on:click="destroyFollowing(friend)">Unfollow</span>
+                </div>             
+            </div>
+            <div v-else>
+              <h3>{{ user.first_name}}'s Friends</h3>
+                <div v-for="followee in user.followees">
+                  <router-link v-bind:to="'/users/' + followee.id">
+                   {{ followee.first_name }} {{ followee.last_name }} 
+                  </router-link>
+                </div>              
+            </div>
           </div>
         </div>
       </div>
